@@ -11,7 +11,7 @@ HAND_DICT = {
     'rock' : {'beats' : 'scissors', 
               'beaten_by' : 'paper'},  
     'paper' : {'beats' : 'rock', 
-               'beaten_by' : 'scisssors'},
+               'beaten_by' : 'scissors'},
     'scissors' : {'beats' : 'paper', 
                   'beaten_by': 'rock'}
 }
@@ -29,13 +29,13 @@ def get_user_hand() -> str:
     while valid == False:
         valid = True
         user_play = input('What is your play? (rock / paper / scissors / "I quit" ')
-        if user_play.lower() not in HANDS or user_play.lower() != 'i quit':
+        if user_play.lower() not in HANDS and user_play.lower() != 'i quit':
             print('Invalid input, try again')
             valid = False
     return user_play.lower()
 
 
-def determine_outcome(user_hand: str, comp_hand: str) -> int:
+def determine_outcome(user_hand: str, comp_hand: str) -> str:
     # win
     if comp_hand == HAND_DICT[user_hand]['beats']:
         return 'You WIN'
@@ -57,7 +57,8 @@ def play_game():
             break
         
         # evaluate
-        print(determine_outcome(user_play, comp_play))
+        result = determine_outcome(user_play, comp_play)
+        print(result)
     print('Thank you for playing')
 
 if __name__ == '__main__':
